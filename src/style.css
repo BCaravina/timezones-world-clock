@@ -1,0 +1,16 @@
+footer {
+  text-align: center;
+  font-size: 11px;
+  opacity: 70%;
+}
+
+footer a {
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 250ms ease-in-out;
+}
+
+footer a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
