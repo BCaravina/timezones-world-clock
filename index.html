@@ -9,24 +9,49 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <header>
-      <h1>World Clock App</h1>
-    </header>
-    <main></main>
-    <footer>
-      World clock application created by
-      <a href="https://github.com/Biscatrix" target="_blank">Bia C.</a>
-      open-sourced on
-      <a
-        href="https://github.com/Biscatrix/timezones-world-clock"
-        target="_blank"
-        >GitHub</a
-      >
-      and hosted on
-      <a href="https://timezone-world-clock.netlify.app/" target="_blank"
-        >Netlify</a
-      >
-    </footer>
+    <div class="exterior-container">
+      <header>
+        <h1>World Clock App</h1>
+      </header>
+      <main>
+        <select name="" id="drop-down-menu" required>
+          <option value="">Choose a city...</option>
+          <option value="sao-paulo">São Paulo</option>
+          <option value="lisbon">Lisbon</option>
+          <option value="san-diego">San Diego</option>
+        </select>
+
+        <div class="city">
+          <h2 class="city-name">São Paulo</h2>
+          <div class="date">December 2nd 2024</div>
+          <div class="time">2:39:40 PM</div>
+        </div>
+        <div class="city">
+          <h2 class="city-name">Lisbon</h2>
+          <div class="date">December 2nd 2024</div>
+          <div class="time">6:39:40 PM</div>
+        </div>
+        <div class="city">
+          <h2 class="city-name">San Diego</h2>
+          <div class="date">December 2nd 2024</div>
+          <div class="time">9:39:40 AM</div>
+        </div>
+      </main>
+      <footer>
+        World clock application created by
+        <a href="https://github.com/Biscatrix" target="_blank">Bia C.</a>
+        open-sourced on
+        <a
+          href="https://github.com/Biscatrix/timezones-world-clock"
+          target="_blank"
+          >GitHub</a
+        >
+        and hosted on
+        <a href="https://timezone-world-clock.netlify.app/" target="_blank"
+          >Netlify</a
+        >
+      </footer>
+    </div>
     <script src="src/index.js"></script>
   </body>
 </html>
