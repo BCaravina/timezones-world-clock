@@ -1,7 +1,67 @@
+body {
+  /* font-family: "Lexend Exa", sans-serif;
+  font-optical-sizing: auto; */
+  font-family: "Chakra Petch", sans-serif;
+  text-align: center;
+  font-size: 16px;
+}
+
+.exterior-container {
+  display: block;
+  margin: 60px auto;
+  padding: 20px 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: beige;
+  max-width: 80%;
+  width: 500px;
+}
+
+header {
+  text-align: left;
+  font-size: 16px;
+  margin: 10px 20px;
+}
+
+#drop-down-menu {
+  border-radius: 6px;
+  font-size: 17px;
+  opacity: 80%;
+  padding: 5px;
+  width: 90%;
+  margin-bottom: 10px;
+}
+
+.city {
+  display: flex;
+
+  border-bottom: 0.5px dashed gray;
+  border-width: 80%;
+}
+
+.city .city-name {
+  text-align: left;
+  font-size: 24px;
+  margin: 10px 20px;
+}
+
+.city .date {
+  text-align: left;
+  margin: 10px 20px;
+}
+
+.city .time {
+  text-align: right;
+  margin: 10px 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
 footer {
   text-align: center;
   font-size: 11px;
   opacity: 70%;
+  padding-top: 10px;
 }
 
 footer a {
