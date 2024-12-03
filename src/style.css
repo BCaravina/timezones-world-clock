@@ -43,13 +43,13 @@ header {
 
 .city .city-name {
   text-align: left;
-  font-size: 28px;
+  font-size: 32px;
   margin: 20px 0 0 20px;
 }
 
 .city .date {
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
   margin: 0 0 15px 20px;
 }
@@ -57,8 +57,12 @@ header {
 .city .time {
   text-align: right;
   margin: 30px 20px 0 0;
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 700;
+}
+
+.city small {
+  font-size: 18px;
 }
 
 footer {
