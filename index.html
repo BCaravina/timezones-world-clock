@@ -19,29 +19,35 @@
   <body>
     <div class="exterior-container">
       <header>
-        <h1>World Clock App</h1>
+        <h1>World Clock</h1>
+        <div>
+          <div>Your current time:</div>
+          <div class="user-current-time"></div>
+        </div>
       </header>
       <main>
         <select name="" id="drop-down-menu" required>
           <option value="">Choose a city...</option>
-          <option value="sao-paulo">São Paulo</option>
-          <option value="lisbon">Lisbon</option>
-          <option value="san-diego">San Diego</option>
+          <option value="America/Sao_Paulo">São Paulo</option>
+          <option value="Europe/Lisbon">Lisbon</option>
+          <option value="America/Los_Angeles">Los Angeles</option>
         </select>
 
-        <div class="city" id="lisbon">
-          <div>
-            <h2 class="city-name">Lisbon</h2>
-            <div class="date"></div>
+        <div class="cities-container">
+          <div class="city-info">
+            <div>
+              <h2 class="city-name">Lisbon</h2>
+              <div class="date"></div>
+            </div>
+            <div class="time"></div>
           </div>
-          <div class="time"></div>
-        </div>
-        <div class="city" id="sao-paulo">
-          <div>
-            <h2 class="city-name">São Paulo</h2>
-            <div class="date">December 2nd 2024</div>
+          <div class="city">
+            <div>
+              <h2 class="city-name">São Paulo</h2>
+              <div class="date">December 2nd 2024</div>
+            </div>
+            <div class="time">6:39:40 <small>PM</small></div>
           </div>
-          <div class="time">6:39:40 <small>PM</small></div>
         </div>
       </main>
     </div>

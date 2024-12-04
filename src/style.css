@@ -5,6 +5,17 @@ body {
   background-color: rgba(245, 245, 220, 0.585);
 }
 
+header {
+  display: flex;
+  justify-content: space-around;
+  font-size: 16px;
+  margin: 30px 0;
+}
+
+h1 {
+  margin: 0;
+}
+
 .exterior-container {
   display: block;
   margin: 60px auto;
@@ -17,10 +28,8 @@ body {
   width: 500px;
 }
 
-header {
-  text-align: left;
-  font-size: 16px;
-  margin: 10px 20px;
+.user-current-time {
+  font-size: 14px;
 }
 
 #drop-down-menu {
@@ -37,31 +46,37 @@ header {
   border-bottom: 0.5px dashed gray;
 }
 
+.city-info {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px dashed gray;
+}
+
 .city:last-child {
   border: none;
 }
 
-.city .city-name {
+.city-name {
   text-align: left;
   font-size: 32px;
   margin: 20px 0 0 20px;
 }
 
-.city .date {
+.date {
   text-align: left;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
   margin: 0 0 15px 20px;
 }
 
-.city .time {
+.time {
   text-align: right;
   margin: 30px 20px 0 0;
   font-size: 34px;
   font-weight: 700;
 }
 
-.city small {
+small {
   font-size: 18px;
 }
 
