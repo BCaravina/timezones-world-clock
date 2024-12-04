@@ -25,10 +25,11 @@ function updateTime() {
 
 function updateCities(event) {
   let cityTimeZone = event.target.value;
-  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
-  let cityCurrentTime = moment().tz(cityTimeZone);
-  let cityInfo = document.querySelector(".cities-container");
-  cityInfo.innerHTML = `
+  if (cityTimeZone) {
+    let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+    let cityCurrentTime = moment().tz(cityTimeZone);
+    let cityInfo = document.querySelector(".cities-container");
+    cityInfo.innerHTML = `
   <div class="cities-container">
           <div class="city-info">
             <div>
@@ -38,8 +39,10 @@ function updateCities(event) {
             <div class="time"${cityCurrentTime.format(
               "h:mm:ss [<small>]A[</small>]"
             )}></div>
-          </div>
+            </div>
+            <a href="/">Back to home page</a>
           `;
+  }
 }
 
 setInterval(updateTime, 1000);
@@ -47,6 +50,10 @@ setInterval(updateTime, 1000);
 let dropDownMenu = document.querySelector("#drop-down-menu");
 dropDownMenu.addEventListener("change", updateCities);
 
-let userCurrentTime = document.querySelector(".user-current-time");
-let userTimeZone = moment.tz.guess();
-userCurrentTime.innerHTML = moment.tz(userTimeZone).format("MMM Do, h:mm a");
+setInterval(function () {
+  let userCurrentTime = document.querySelector(".user-current-time");
+  let userTimeZone = moment.tz.guess();
+  userCurrentTime.innerHTML = moment
+    .tz(userTimeZone)
+    .format("MMM Do, h:mm:ss a");
+}, 1000);

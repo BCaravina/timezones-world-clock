@@ -40,6 +40,13 @@ h1 {
   width: 95%;
 }
 
+.cities-container a {
+  font-size: 12px;
+  text-decoration: none;
+  color: black;
+  text-align: left;
+}
+
 .city {
   display: flex;
   justify-content: space-between;
