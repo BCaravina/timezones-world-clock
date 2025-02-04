@@ -1,26 +1,32 @@
-function updateTime() {
-  let lisbonElement = document.querySelector(".city-info");
-  if (lisbonElement) {
-    let lisbonDateElement = lisbonElement.querySelector(".city-info .date");
-    let lisbonTimeElement = lisbonElement.querySelector(".city-info .time");
-    let lisbonTime = moment().tz("Europe/Lisbon");
+function populateCityDropdown() {
+  const dropDownMenu = document.querySelector("#drop-down-menu");
+  const momentTimezones = moment.tz.names();
 
-    lisbonDateElement.innerHTML = lisbonTime.format("MMMM Do YYYY");
-    lisbonTimeElement.innerHTML = `${lisbonTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    )}`;
-  }
-  let saoPauloElement = document.querySelector(".city");
-  if (saoPauloElement) {
-    let saoPauloDateElement = saoPauloElement.querySelector(".city .date");
-    let saoPauloTimeElement = saoPauloElement.querySelector(".city .time");
-    let saoPauloTime = moment().tz("America/Sao_Paulo");
+  const uniqueCities = new Set();
 
-    saoPauloDateElement.innerHTML = saoPauloTime.format("MMMM Do YYYY");
-    saoPauloTimeElement.innerHTML = `${saoPauloTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    )}`;
-  }
+  const sortedTimezones = momentTimezones
+    .filter((tz) => tz.includes("/") && !tz.startsWith("Etc/"))
+    .filter((tz) => {
+      const parts = tz.split("/");
+
+      if (parts.length > 1) {
+        const cityKey = parts[0] + "/" + parts[1];
+        if (!uniqueCities.has(cityKey)) {
+          uniqueCities.add(cityKey);
+          return true;
+        }
+      }
+      return false;
+    })
+    .sort((a, b) => a.split("/")[1].localeCompare(b.split("/")[1]));
+
+  sortedTimezones.forEach((timezone) => {
+    const cityName = timezone.split("/")[1].replace(/_/g, " ");
+    const option = document.createElement("option");
+    option.value = timezone;
+    option.textContent = cityName;
+    dropDownMenu.appendChild(option);
+  });
 }
 
 function updateCities(event) {
@@ -28,32 +34,81 @@ function updateCities(event) {
   if (cityTimeZone) {
     let cityName = cityTimeZone.replace("_", " ").split("/")[1];
     let cityCurrentTime = moment().tz(cityTimeZone);
-    let cityInfo = document.querySelector(".cities-container");
-    cityInfo.innerHTML = `
-  <div class="cities-container">
-          <div class="city-info">
+    let citiesContainer = document.querySelector(".cities-container");
+
+    citiesContainer.innerHTML = "";
+
+    const cityDiv = document.createElement("div");
+    cityDiv.classList.add("city-info");
+    cityDiv.innerHTML = `
             <div>
-              <h2 class="city-name">${cityName}</h2>
-              <div class="date">${cityCurrentTime.format("MMMM Do YYYY")}</div>
+                <h2 class="city-name">${cityName}</h2>
+                <div class="date">${cityCurrentTime.format(
+                  "MMMM Do YYYY"
+                )}</div>
             </div>
-            <div class="time"${cityCurrentTime.format(
+            <div class="time">${cityCurrentTime.format(
               "h:mm:ss [<small>]A[</small>]"
-            )}></div>
-            </div>
-            <a href="/">Back to home page</a>
-          `;
+            )}</div>
+        `;
+    citiesContainer.appendChild(cityDiv);
+
+    addUserLocation();
   }
 }
 
-setInterval(updateTime, 1000);
+function addUserLocation() {
+  const citiesContainer = document.querySelector(".cities-container");
+
+  let userLocationDiv = document.querySelector(".user-location");
+
+  if (!userLocationDiv) {
+    userLocationDiv = document.createElement("div");
+    userLocationDiv.classList.add("city", "user-location");
+    citiesContainer.appendChild(userLocationDiv);
+  }
+
+  const userTimeZone = moment.tz.guess();
+  const userTime = moment.tz(userTimeZone);
+  let currentCity = userTimeZone.replace("_", " ").split("/")[1];
+  userLocationDiv.innerHTML = `
+        <div>
+            <h2 class="city-name">${currentCity}</h2>
+            <div class="date">${userTime.format("MMMM Do YYYY")}</div>
+        </div>
+        <div class="time">${userTime.format(
+          "h:mm:ss [<small>]A[</small>]"
+        )}</div>
+    `;
+}
+
+function updateAllTimezones() {
+  const userLocationDiv = document.querySelector(".user-location .time");
+  if (userLocationDiv) {
+    const userTimeZone = moment.tz.guess();
+    const userTime = moment.tz(userTimeZone);
+    userLocationDiv.innerHTML = userTime.format("h:mm:ss [<small>]A[</small>]");
+  }
+
+  const selectedCityDiv = document.querySelector(".city-info .time");
+  if (selectedCityDiv) {
+    const dropDownMenu = document.querySelector("#drop-down-menu");
+    const selectedTimeZone = dropDownMenu.value;
+
+    if (selectedTimeZone) {
+      const selectedTime = moment().tz(selectedTimeZone);
+      selectedCityDiv.innerHTML = selectedTime.format(
+        "h:mm:ss [<small>]A[</small>]"
+      );
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  populateCityDropdown();
+  addUserLocation();
+  setInterval(updateAllTimezones, 1000);
+});
 
 let dropDownMenu = document.querySelector("#drop-down-menu");
 dropDownMenu.addEventListener("change", updateCities);
-
-setInterval(function () {
-  let userCurrentTime = document.querySelector(".user-current-time");
-  let userTimeZone = moment.tz.guess();
-  userCurrentTime.innerHTML = moment
-    .tz(userTimeZone)
-    .format("MMM Do, h:mm:ss a");
-}, 1000);
